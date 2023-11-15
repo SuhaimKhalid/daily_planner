@@ -3,3 +3,85 @@
 var cureent_date = $("#currentDay");
 // Use Day.js to get current Date and pass it to a variable
 cureent_date.text(dayjs().format("dddd, MMMM Do"));
+
+
+// Delcare a vaiable to get the class of Calender Container
+var cal_container = $('.calendar_container');
+
+// Delcare working hours of the day
+var working_hours=8;
+
+// Starting hour of the day
+var hours= 9; 
+
+// Declare bolean to check Time format
+var am=true;
+var pm=false;
+
+render();
+
+// Function TO Render all Code in the Start of Page Load
+function render(){
+
+    // Make that much of daily Plain list as much working hours
+    for(var list=0; list<=working_hours;list++)
+    {
+    // Only run if Am is true
+if(am)
+{
+    // If hours are less then 12
+    if(hours<=12)
+    { 
+        // Add Am string to Hour value
+        var hour_format= hours + " AM";
+        createHtml(hour_format,list);
+        hours++;
+        if(hours>12)
+        {
+            //Change hour value to 1 so we can switch from am to pm
+            hours=1;   
+            am=false;
+            pm=true;
+        }
+    }
+  
+}
+   // Only run if Pm is true
+else if(pm)
+{
+    // If hours less then or equal to 12
+    if(hours<=12)
+    { 
+        // Add Pm string to Hour value
+        var hour_format= hours + " PM";
+        createHtml(hour_format,list);
+        hours++;
+        if(hours>12)
+        {
+            //Change hour value to 1 so we can switch from am to pm
+            hours=1;   
+            am=true;
+            pm=false;
+            
+        }
+    }
+  
+} 
+    }
+}
+
+function createHtml(hour,list)
+{
+    var list_row=$("<div class='row calendar_row' data-index="+ list + " ></div>");
+   var l1=$("<div class='col-1 time-block hour' data-index="+ list + "></div>");
+   var l2=$("<div class='col-10'><input type='text' data-index="+ list + "></div>");
+   var l3=$("<div class='block3 col-1 saveBtn' data-index="+ list + "><i class='fa fa-floppy-disk' data-index="+ list + "></i> </div>");
+   cal_container.append(list_row);
+  
+   list_row.append(l1);
+   list_row.append(l2);
+   list_row.append(l3);
+
+   list_row.children(".time-block").text(hour);
+
+}

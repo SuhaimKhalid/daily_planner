@@ -5,7 +5,7 @@ body {
 }
 
 textarea {
-  background: transparent;
+  /* background: transparent; */
   border: none;
   resize: none;
   color: #000000;
@@ -27,11 +27,15 @@ header {
 }
 
 .time-block {
-  text-align: center;
-  border-radius: 15px;
+  
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .row {
+
   white-space: pre-wrap;
   height: 80px;
   border-top: 1px solid white;
@@ -64,9 +68,22 @@ header {
   border-bottom-right-radius: 15px;
   background-color: #06aed5;
   color: white;
+  cursor: pointer;
 }
 
-.saveBtn i:hover {
-  font-size: 20px;
+.saveBtn:hover i {
+  font-size: 30px;
   transition: all 0.3s ease-in-out;
 }
+.calendar_row div{
+  padding: 0px;
+
+}
+.row input{
+height: 80px;
+width: 100%;
+}
+.block3 i{font-size: 15px;  transition: all 0.3s ease-in-out;}
+.block3 {display: flex;justify-content: center;align-items: center;}
+
+.calendar_row{margin: 10px;}
