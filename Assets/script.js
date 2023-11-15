@@ -22,13 +22,13 @@ var pm=false;
 var InputArray = new Array(9);
 
  // Declare a variable to get current hour
-//  var currentHour = dayjs().hour();
-// //  convert it to 12 hour format by subtracting 12 in it
-// if(currentHour>12)
-// {
-//     currentHour-12;
-// }
-var currentHour=3;
+ var currentHour = dayjs().hour();
+//  convert it to 12 hour format by subtracting 12 in it
+if(currentHour>12)
+{
+    currentHour-12;
+}
+// var currentHour=3;
 
 render();
 retrivedata();
@@ -97,7 +97,9 @@ function createHtml(hour_format,list,hours)
    list_row.children(".time-block").text(hour_format);
 
     if (hours < currentHour) {
+        l1.attr("style","opacity: 0.5;");
         l2.children("input").addClass("past");
+        l3.attr("style","pointer-events:none;opacity: 0.5;");
     } else if (hours === currentHour) {
         l2.children("input").addClass("present");
     } else {
@@ -132,16 +134,22 @@ $(".calendar_container").on("click",".saveBtn",function (event){
         // Delcare a variable to hold 
         var get_local= JSON.parse(localStorage.getItem("Inputs-Array"));
         
-        // if get local variable is null then pass empty string
-        InputArray = get_local || [];
-        
-        // Make a loop to show all local storage into the input field
-        for(var i=0; i<InputArray.length; i++)
-        {
-            // Passing data
-            var getval=InputArray[i];
+            if(get_local){
+                for(var i=0; i<InputArray.length; i++)
+                {
+                    InputArray = get_local;
+                    // Passing data
+                    var getval=InputArray[i];
+            
+                    // Putting it inthe html by .val(function)
+                    $("input[data-index='"+ i +"']").val(getval);
+                }
+            }
 
-            // Putting it inthe html by .val(function)
-            $("input[data-index='"+ i +"']").val(getval);
-        }
     }
+
+    // Stop User to enter in the past input field
+    $('.past').keydown(function(event) {
+        event.preventDefault();
+        return false;
+     });
