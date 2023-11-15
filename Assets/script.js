@@ -22,7 +22,7 @@ var pm=false;
 var InputArray = new Array(9);
 
 render();
-
+retrivedata();
 // Function TO Render all Code in the Start of Page Load
 function render(){
 
@@ -114,17 +114,18 @@ $(".calendar_container").on("click",".saveBtn",function (event){
 
         // Delcare a variable to hold 
         var get_local= JSON.parse(localStorage.getItem("Inputs-Array"));
-        InputArray=get_local;
-       if(get_local===null)
-       {
-    
-       }
-       else{
-        for(var i=0; i<get_local.length; i++)
+        
+        // if get local variable is null then pass empty string
+        InputArray = get_local || [];
+        
+        // Make a loop to show all local storage into the input field
+        for(var i=0; i<InputArray.length; i++)
         {
-            var getval=get_local[i];
-            var n= i+1;
-            $("input[data-index='"+ n +"']").val(getval);
+            // Passing data
+            var getval=InputArray[i];
+
+            // Putting it inthe html by .val(function)
+            $("input[data-index='"+ i +"']").val(getval);
         }
-       }
+       
     }
