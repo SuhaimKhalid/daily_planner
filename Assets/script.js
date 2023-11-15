@@ -26,9 +26,10 @@ var InputArray = new Array(9);
 //  convert it to 12 hour format by subtracting 12 in it
 if(currentHour>12)
 {
-    currentHour-12;
+    currentHour-=12;
+    
 }
-// var currentHour=3;
+
 
 render();
 retrivedata();
@@ -97,15 +98,15 @@ function createHtml(hour_format,list,hours)
    list_row.children(".time-block").text(hour_format);
 
 
-//    if (currentHour >hours) {
-//     // l1.attr("style","opacity: 0.5;");
-//     l2.children("input").addClass("past");
-//     // l3.attr("style","pointer-events:none;opacity: 0.5;");
-// } else if (currentHour === hours) {
-//     l2.children("input").addClass("present");
-// } else {
-//     l2.children("input").addClass("future");
-// }
+   if (currentHour >hours) {
+    // l1.attr("style","opacity: 0.5;");
+    l2.children("input").addClass("past");
+    // l3.attr("style","pointer-events:none;opacity: 0.5;");
+} else if (currentHour === hours) {
+    l2.children("input").addClass("present");
+} else {
+    l2.children("input").addClass("future");
+}
 
 
 // if(am)
