@@ -21,6 +21,15 @@ var pm=false;
 // Declare a empty string to store input valu in a string
 var InputArray = new Array(9);
 
+ // Declare a variable to get current hour
+//  var currentHour = dayjs().hour();
+// //  convert it to 12 hour format by subtracting 12 in it
+// if(currentHour>12)
+// {
+//     currentHour-12;
+// }
+var currentHour=3;
+
 render();
 retrivedata();
 // Function TO Render all Code in the Start of Page Load
@@ -37,7 +46,7 @@ if(am)
     { 
         // Add Am string to Hour value
         var hour_format= hours + " AM";
-        createHtml(hour_format,list);
+        createHtml(hour_format,list,hours);
         hours++;
         if(hours>12)
         {
@@ -57,7 +66,7 @@ else if(pm)
     { 
         // Add Pm string to Hour value
         var hour_format= hours + " PM";
-        createHtml(hour_format,list);
+        createHtml(hour_format,list,hours);
         hours++;
         if(hours>12)
         {
@@ -73,7 +82,7 @@ else if(pm)
     }
 }
 
-function createHtml(hour,list)
+function createHtml(hour_format,list,hours)
 {
     var list_row=$("<div class='row calendar_row' data-index="+ list + " ></div>");
    var l1=$("<div class='col-1 time-block hour' data-index="+ list + "></div>");
@@ -85,7 +94,15 @@ function createHtml(hour,list)
    list_row.append(l2);
    list_row.append(l3);
 
-   list_row.children(".time-block").text(hour);
+   list_row.children(".time-block").text(hour_format);
+
+    if (hours < currentHour) {
+        l2.children("input").addClass("past");
+    } else if (hours === currentHour) {
+        l2.children("input").addClass("present");
+    } else {
+        l2.children("input").addClass("future");
+    }
 
 }
 
@@ -127,5 +144,4 @@ $(".calendar_container").on("click",".saveBtn",function (event){
             // Putting it inthe html by .val(function)
             $("input[data-index='"+ i +"']").val(getval);
         }
-       
     }
