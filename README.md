@@ -63,7 +63,7 @@ Page published at: https://suhaimkhalid.github.io/daily_planner/
 ## Screenshot
 
 ### Main Screen View
-![Html View](/assets/Images/Html.png)
+![Html View](/Assets/Images/Html.png)
 
 ## Contact
 
