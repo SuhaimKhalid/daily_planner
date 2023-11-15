@@ -18,6 +18,9 @@ var hours= 9;
 var am=true;
 var pm=false;
 
+// Declare a empty string to store input valu in a string
+var InputArray = new Array(9);
+
 render();
 
 // Function TO Render all Code in the Start of Page Load
@@ -85,3 +88,43 @@ function createHtml(hour,list)
    list_row.children(".time-block").text(hour);
 
 }
+
+// Save Button Function
+$(".calendar_container").on("click",".saveBtn",function (event){
+  
+    // Getting the current target dataset into the variable
+    var btn_number = event.target.dataset.index;
+    
+    // Getting the input on the base of dataset
+    var input_text=$("input[data-index='"+btn_number+"']").val();
+
+    //Store input value into the array 
+    InputArray[btn_number]=input_text;
+    
+    // InputArray.splice(btn_number-1, 1, input_text);
+    
+    // Store array into the local Storage
+    localStorage.setItem("Inputs-Array",JSON.stringify(InputArray));
+    
+    })
+
+
+    // Create Function to retrive data from the local Storage
+    function retrivedata(){
+
+        // Delcare a variable to hold 
+        var get_local= JSON.parse(localStorage.getItem("Inputs-Array"));
+        InputArray=get_local;
+       if(get_local===null)
+       {
+    
+       }
+       else{
+        for(var i=0; i<get_local.length; i++)
+        {
+            var getval=get_local[i];
+            var n= i+1;
+            $("input[data-index='"+ n +"']").val(getval);
+        }
+       }
+    }
