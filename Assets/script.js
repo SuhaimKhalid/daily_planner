@@ -96,17 +96,48 @@ function createHtml(hour_format,list,hours)
 
    list_row.children(".time-block").text(hour_format);
 
-    if (hours < currentHour) {
-        l1.attr("style","opacity: 0.5;");
-        l2.children("input").addClass("past");
-        l3.attr("style","pointer-events:none;opacity: 0.5;");
-    } else if (hours === currentHour) {
-        l2.children("input").addClass("present");
-    } else {
-        l2.children("input").addClass("future");
-    }
+
+//    if (currentHour >hours) {
+//     // l1.attr("style","opacity: 0.5;");
+//     l2.children("input").addClass("past");
+//     // l3.attr("style","pointer-events:none;opacity: 0.5;");
+// } else if (currentHour === hours) {
+//     l2.children("input").addClass("present");
+// } else {
+//     l2.children("input").addClass("future");
+// }
+
+
+// if(am)
+// {
+//     if (currentHour >hours) {
+//         // l1.attr("style","opacity: 0.5;");
+//         l2.children("input").addClass("past");
+//         // l3.attr("style","pointer-events:none;opacity: 0.5;");
+//     } else if (currentHour === hours) {
+//         l2.children("input").addClass("present");
+//     } else {
+//         l2.children("input").addClass("future");
+//     }
+//     console.log(am)
+// }
+// if(pm)
+// {
+//     if (currentHour >hours) {
+//         // l1.attr("style","opacity: 0.5;");
+//         l2.children("input").addClass("past");
+//         // l3.attr("style","pointer-events:none;opacity: 0.5;");
+//     } else if (currentHour === hours) {
+//         l2.children("input").addClass("present");
+//     } else {
+//         l2.children("input").addClass("future");
+//     }
+//     console.log(am)
+// }
+   
 
 }
+
 
 // Save Button Function
 $(".calendar_container").on("click",".saveBtn",function (event){
@@ -148,8 +179,8 @@ $(".calendar_container").on("click",".saveBtn",function (event){
 
     }
 
-    // Stop User to enter in the past input field
-    $('.past').keydown(function(event) {
-        event.preventDefault();
-        return false;
-     });
+    // // Stop User to enter in the past input field
+    // $('.past').keydown(function(event) {
+    //     event.preventDefault();
+    //     return false;
+    //  });
