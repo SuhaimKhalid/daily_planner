@@ -14,21 +14,15 @@ var working_hours=8;
 // Starting hour of the day
 var hours= 9; 
 
-// Declare bolean to check Time format
-var am=true;
-var pm=false;
+
+
 
 // Declare a empty string to store input valu in a string
 var InputArray = new Array(9);
 
  // Declare a variable to get current hour
  var currentHour = dayjs().hour();
-//  convert it to 12 hour format by subtracting 12 in it
-if(currentHour>12)
-{
-    currentHour-=12;
-    
-}
+
 
 
 render();
@@ -39,103 +33,71 @@ function render(){
     // Make that much of daily Plain list as much working hours
     for(var list=0; list<=working_hours;list++)
     {
-    // Only run if Am is true
-if(am)
-{
-    // If hours are less then 12
-    if(hours<=12)
-    { 
         // Add Am string to Hour value
-        var hour_format= hours + " AM";
-        createHtml(hour_format,list,hours);
+        var hour_format= formatHour(hours);
+        createHtml(hour_format, list, hours);
         hours++;
-        if(hours>12)
-        {
-            //Change hour value to 1 so we can switch from am to pm
-            hours=1;   
-            am=false;
-            pm=true;
-        }
-    }
-  
-}
-   // Only run if Pm is true
-else if(pm)
-{
-    // If hours less then or equal to 12
-    if(hours<=12)
-    { 
-        // Add Pm string to Hour value
-        var hour_format= hours + " PM";
-        createHtml(hour_format,list,hours);
-        hours++;
-        if(hours>12)
-        {
-            //Change hour value to 1 so we can switch from am to pm
-            hours=1;   
-            am=true;
-            pm=false;
-            
-        }
-    }
-  
-} 
     }
 }
 
-function createHtml(hour_format,list,hours)
+function formatHour(hour) {
+    // Delcare 2 Variable
+  var ampm;
+  var formattedHour;
+
+//   make condition if hour greater and equal to 12
+  if (hour >= 12) {
+    // Set ampm to PM
+    ampm = "PM";
+    if(hour>12)
+    {
+        // If hours is creater then 12 subtract 12 in it to make 12 hour format 
+       formattedHour= hour - 12
+    }
+    else{
+        formattedHour= 12;
+    }
+  }
+   else {
+    ampm = "AM";
+    if(hour===0)
+    {
+       formattedHour=  12
+    }
+    else{
+        formattedHour= hour;
+    }
+  }
+
+  return formattedHour + " " + ampm;
+  }
+
+
+function createHtml(hour_format, list, hours)
 {
-    var list_row=$("<div class='row calendar_row' data-index="+ list + " ></div>");
+    // Creating Html dynamically
+    var list_row=$("<div class='row calendar_row' data-index="+ list + "  ></div>");
    var l1=$("<div class='col-1 time-block hour' data-index="+ list + "></div>");
-   var l2=$("<div class='col-10'><input type='text' data-index="+ list + "></div>");
+   var l2=$("<div class='col-10'><input type='text'  data-index="+ list + "></div>");
    var l3=$("<div class='block3 col-1 saveBtn' data-index="+ list + "><i class='fa fa-floppy-disk' data-index="+ list + "></i> </div>");
    cal_container.append(list_row);
   
+//    Appending value to their parent divs
    list_row.append(l1);
    list_row.append(l2);
    list_row.append(l3);
 
    list_row.children(".time-block").text(hour_format);
 
-
    if (currentHour >hours) {
     // l1.attr("style","opacity: 0.5;");
     l2.children("input").addClass("past");
     // l3.attr("style","pointer-events:none;opacity: 0.5;");
-} else if (currentHour === hours) {
+    } else if (currentHour === hours) {
     l2.children("input").addClass("present");
-} else {
+    } else {
     l2.children("input").addClass("future");
-}
-
-
-// if(am)
-// {
-//     if (currentHour >hours) {
-//         // l1.attr("style","opacity: 0.5;");
-//         l2.children("input").addClass("past");
-//         // l3.attr("style","pointer-events:none;opacity: 0.5;");
-//     } else if (currentHour === hours) {
-//         l2.children("input").addClass("present");
-//     } else {
-//         l2.children("input").addClass("future");
-//     }
-//     console.log(am)
-// }
-// if(pm)
-// {
-//     if (currentHour >hours) {
-//         // l1.attr("style","opacity: 0.5;");
-//         l2.children("input").addClass("past");
-//         // l3.attr("style","pointer-events:none;opacity: 0.5;");
-//     } else if (currentHour === hours) {
-//         l2.children("input").addClass("present");
-//     } else {
-//         l2.children("input").addClass("future");
-//     }
-//     console.log(am)
-// }
-   
+    }
 
 }
 
@@ -147,12 +109,10 @@ $(".calendar_container").on("click",".saveBtn",function (event){
     var btn_number = event.target.dataset.index;
     
     // Getting the input on the base of dataset
-    var input_text=$("input[data-index='"+btn_number+"']").val();
+    var input_text=$("input[data-index='"+btn_number+"']").val().trim();
 
     //Store input value into the array 
     InputArray[btn_number]=input_text;
-    
-    // InputArray.splice(btn_number-1, 1, input_text);
     
     // Store array into the local Storage
     localStorage.setItem("Inputs-Array",JSON.stringify(InputArray));
