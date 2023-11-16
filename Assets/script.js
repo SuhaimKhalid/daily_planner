@@ -55,20 +55,24 @@ function formatHour(hour) {
        formattedHour= hour - 12
     }
     else{
+        // if hour is 12
         formattedHour= 12;
     }
   }
+//   Only run when hours are less then 12
    else {
+    // Set ampm to AM
     ampm = "AM";
     if(hour===0)
     {
+        
        formattedHour=  12
     }
     else{
         formattedHour= hour;
     }
   }
-
+  // retuen the function with both of values
   return formattedHour + " " + ampm;
   }
 
@@ -76,7 +80,7 @@ function formatHour(hour) {
 function createHtml(hour_format, list, hours)
 {
     // Creating Html dynamically
-    var list_row=$("<div class='row calendar_row' data-index="+ list + "  ></div>");
+   var list_row=$("<div class='row calendar_row' data-index="+ list + "  ></div>");
    var l1=$("<div class='col-1 time-block hour' data-index="+ list + "></div>");
    var l2=$("<div class='col-10'><input type='text'  data-index="+ list + "></div>");
    var l3=$("<div class='block3 col-1 saveBtn' data-index="+ list + "><i class='fa fa-floppy-disk' data-index="+ list + "></i> </div>");
@@ -90,9 +94,11 @@ function createHtml(hour_format, list, hours)
    list_row.children(".time-block").text(hour_format);
 
    if (currentHour >hours) {
-    // l1.attr("style","opacity: 0.5;");
+    // Make Past class line opacity less to view
+    l1.attr("style","opacity: 0.5;");
     l2.children("input").addClass("past");
-    // l3.attr("style","pointer-events:none;opacity: 0.5;");
+    // Make Past class line unable to save 
+    l3.attr("style","pointer-events:none;opacity: 0.5;");
     } else if (currentHour === hours) {
     l2.children("input").addClass("present");
     } else {
