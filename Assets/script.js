@@ -97,8 +97,10 @@ function createHtml(hour_format, list, hours)
     // Make Past class line opacity less to view
     l1.attr("style","opacity: 0.5;");
     l2.children("input").addClass("past");
+
     // Make Past class line unable to save 
     l3.attr("style","pointer-events:none;opacity: 0.5;");
+    
     } else if (currentHour === hours) {
     l2.children("input").addClass("present");
     } else {

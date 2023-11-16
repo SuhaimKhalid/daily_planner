@@ -38,6 +38,19 @@ Time blocks are color-coded to indicate whether they are in the past, present, o
 ## Local Storage:
 Entered events are saved to local storage, ensuring that your schedule persists between page reloads.
 
+
+## Instruction:
+
+### Past:
+Time blocks that have already passed are identified with the "past" class and displayed in grey. In these blocks, users can add information, but saving is disabled as it is no longer possible to save data in the past.
+
+### Present:
+Time blocks in the present are marked with the "present" class and displayed in red. Users can add data to these blocks and save it.
+
+### Future:
+Future time blocks are distinguished with the "future" class and displayed in green. Users can add data to these blocks and save it.
+
+
 ## Installation:
 
 The Code Quiz Game can be played directly in your web browser without any need for installation. Simply visit the game's URL to start playing.
